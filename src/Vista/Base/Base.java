@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class Base extends Stage
 {
-
     public static String titulo;
 
     public Base(String title) throws IOException

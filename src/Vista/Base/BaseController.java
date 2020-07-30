@@ -8,7 +8,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class BaseController
@@ -40,7 +40,8 @@ public class BaseController
 
         LateralPanel.initialize(userButton, examenButton, resultButton, userPane);
 
-        RegisterController.init(nombreTextfield, apellidoTextfield, usernameTextfield, passwordTextfield, registerUserButton);
+        RegisterController.initialize(nombreTextfield, apellidoTextfield,
+                usernameTextfield, passwordTextfield, registerUserButton);
     }
 }
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #37474f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.Base.BaseController">
+   <children>
+      <Pane layoutX="157.0" layoutY="48.0" prefHeight="338.0" prefWidth="532.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#62727b" height="338.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="532.0" />
+         </children>
+      </Pane>
+      <Pane fx:id="panelSuperior" prefHeight="32.0" prefWidth="700.0" style="-fx-background-color: white;">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Group layoutX="634.0" layoutY="-3.0">
+               <children>
+                  <Rectangle fx:id="shadowLabelM" arcHeight="5.0" arcWidth="5.0" fill="#62727bb0" height="26.0" layoutX="5.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="23.0" />
+                  <Label fx:id="labelM" alignment="CENTER" prefHeight="32.0" prefWidth="33.0" text="_">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="666.0">
+               <children>
+                  <Rectangle fx:id="shadowLabelX" arcHeight="5.0" arcWidth="5.0" fill="#e52727b1" height="26.0" layoutX="5.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="23.0" />
+                  <Label fx:id="labelX" alignment="CENTER" layoutY="-1.0" prefHeight="32.0" prefWidth="33.0" text="X" />
+               </children>
+            </Group>
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="48.0" prefHeight="338.0" prefWidth="120.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#102027" height="338.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Rectangle>
+            <JFXButton fx:id="userButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" style="-fx-background-color: #62727B;" text="Usuarios" textFill="WHITE" />
+            <JFXButton fx:id="examenButton" focusTraversable="false" layoutY="44.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Examen" textFill="WHITE" />
+            <JFXButton fx:id="resultButton" focusTraversable="false" layoutY="88.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Resultados" textFill="WHITE" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

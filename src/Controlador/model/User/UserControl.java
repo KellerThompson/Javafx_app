@@ -66,4 +66,16 @@ public class UserControl
             delete(db, Integer.parseInt(tabla[i][0]));
         }
     }
+
+    public static String[][] consultarUsuarios()
+    {
+        Database db = new Database();
+        db.conectar();
+        db.executeQuery("select Persona.name, Persona.lastname, User.username, User.password, " +
+                "User.examen, User.fechaRegistro from Persona " +
+                "inner join User on Persona.idPersona = User.idPersona;");
+        String[][] tabla = db.obtenerDatosTabla();
+        db.cerrarConexion();
+        return tabla;
+    }
 }

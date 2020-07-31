@@ -19,7 +19,9 @@ public class LateralPanel
         userPane = userPane1;
 
         examenButton = examenButton1;
+
         resultButton = resultButton1;
+
         initlateralButton(userButton, LateralPanel.buttonType.user);
         initlateralButton(examenButton, LateralPanel.buttonType.examen);
         initlateralButton(resultButton, LateralPanel.buttonType.result);

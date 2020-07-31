@@ -1,4 +1,4 @@
-package Vista.Base.UserPane.Register;
+package Vista.Base.UserPane;
 
 import Controlador.model.Persona.Persona;
 import Controlador.model.Persona.PersonaControl;
@@ -45,6 +45,8 @@ public class RegisterController
             apellidoTextfield.setText("");
             usernameTextfield.setText("");
             passwordTextfield.setText("");
+
+            TableController.actualizarTabla();
         }
     }
 

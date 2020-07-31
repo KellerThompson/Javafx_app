@@ -1,7 +1,6 @@
-package Vista.Base.UserPane.Consulta;
+package Vista.Base.UserPane;
 
 import Controlador.model.User.UserControl;
-import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -10,24 +9,22 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
-public class userTableController
+public class TableController
 {
     private static TableView tablaUsuarios;
-    private static String[] columnNames = {"Nombre", "Apellidos", "Usuario", "Password", "Examen", "Registro"};
+    private static String[] columnNames = {"ID", "Nombre", "Apellidos", "Usuario", "Password", "Examen", "Registro"};
 
     public static void initialize(TableView tabla)
     {
         tablaUsuarios = tabla;
-        tablaUsuarios.setEditable(false);
-
+        //tablaUsuarios.setEditable(false);
         addColumns(columnNames);
         actualizarTabla();
     }
 
-    private static void actualizarTabla()
+    public static void actualizarTabla()
     {
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
-
         String[][] users = UserControl.consultarUsuarios();
         for(int i = 0; i < users.length; i++) // filas
         {
@@ -36,8 +33,6 @@ public class userTableController
             {
                 row.add(users[i][e]);
             }
-            row.forEach(value -> System.out.print(value + " "));
-            System.out.println();
             data.add(row);
         }
         tablaUsuarios.setItems(data);
@@ -49,10 +44,6 @@ public class userTableController
         {
             final int j = i;
 
-            /*
-            TableColumn<ObservableList<String>, String> col = new TableColumn<>(columnNames[i]);
-            col.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>());
-            */
             TableColumn col = new TableColumn(column[i]);
             col.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>()
             {

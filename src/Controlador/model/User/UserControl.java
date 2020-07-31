@@ -71,7 +71,7 @@ public class UserControl
     {
         Database db = new Database();
         db.conectar();
-        db.executeQuery("select Persona.name, Persona.lastname, User.username, User.password, " +
+        db.executeQuery("select Persona.idPersona, Persona.name, Persona.lastname, User.username, User.password, " +
                 "User.examen, User.fechaRegistro from Persona " +
                 "inner join User on Persona.idPersona = User.idPersona;");
         String[][] tabla = db.obtenerDatosTabla();

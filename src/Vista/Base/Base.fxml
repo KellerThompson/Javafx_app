@@ -8,56 +8,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="748.0" style="-fx-background-color: #37474f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.Base.BaseController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="563.0" prefWidth="601.0" style="-fx-background-color: #37474f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Vista.Base.BaseController">
    <children>
-      <Pane fx:id="userPane" layoutX="157.0" layoutY="48.0" prefHeight="338.0" prefWidth="577.0">
-         <children>
-            <Pane fx:id="userConsultaPane" layoutY="45.0" prefHeight="293.0" prefWidth="495.0">
-               <children>
-                  <TableView fx:id="tablaUsuarios" layoutY="40.0" prefHeight="200.0" prefWidth="495.0" />
-               </children>
-            </Pane>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="338.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="577.0" />
-            <JFXButton fx:id="topUserRegisterButton" focusTraversable="false" prefHeight="40.0" prefWidth="240.0" text="Registro" />
-            <JFXButton fx:id="topUserConsultaButton" focusTraversable="false" layoutX="240.0" prefHeight="40.0" prefWidth="240.0" text="Consulta" />
-            <Pane fx:id="userRegisterPane" layoutX="1.0" layoutY="45.0" prefHeight="293.0" prefWidth="479.0">
-               <children>
-                  <JFXTextField fx:id="nombreTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="46.0" layoutY="40.0" prefHeight="0.0" prefWidth="145.0" promptText="Nombre" unFocusColor="BLACK">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </JFXTextField>
-                  <JFXTextField fx:id="apellidoTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="284.0" layoutY="43.0" prefHeight="0.0" prefWidth="145.0" promptText="Apellidos" unFocusColor="BLACK">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </JFXTextField>
-                  <JFXTextField fx:id="usernameTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="46.0" layoutY="112.0" prefHeight="0.0" prefWidth="145.0" promptText="Username" unFocusColor="BLACK">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </JFXTextField>
-                  <JFXTextField fx:id="passwordTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="283.0" layoutY="112.0" prefHeight="0.0" prefWidth="145.0" promptText="Password" unFocusColor="BLACK">
-                     <padding>
-                        <Insets left="10.0" />
-                     </padding>
-                  </JFXTextField>
-                  <Button fx:id="registerUserButton" layoutX="180.0" layoutY="193.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Registrar" />
-               </children>
-            </Pane>
-         </children>
-      </Pane>
-      <Pane fx:id="panelSuperior" prefHeight="32.0" prefWidth="748.0" style="-fx-background-color: white;">
+      <Pane fx:id="panelSuperior" prefHeight="32.0" prefWidth="601.0" style="-fx-background-color: white;">
          <effect>
             <DropShadow />
          </effect>
          <children>
-            <Group layoutX="683.0" layoutY="-3.0">
+            <Group layoutX="535.0" layoutY="-3.0">
                <children>
                   <Rectangle fx:id="shadowLabelM" arcHeight="5.0" arcWidth="5.0" fill="#62727bb0" height="26.0" layoutX="5.0" layoutY="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="23.0" />
                   <Label fx:id="labelM" alignment="CENTER" prefHeight="32.0" prefWidth="33.0" text="_">
@@ -67,7 +32,7 @@
                   </Label>
                </children>
             </Group>
-            <Group layoutX="715.0">
+            <Group layoutX="567.0">
                <children>
                   <Rectangle fx:id="shadowLabelX" arcHeight="5.0" arcWidth="5.0" fill="#e52727b1" height="26.0" layoutX="5.0" layoutY="2.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="23.0" />
                   <Label fx:id="labelX" alignment="CENTER" layoutY="-1.0" prefHeight="32.0" prefWidth="33.0" text="X" />
@@ -75,17 +40,67 @@
             </Group>
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="48.0" prefHeight="338.0" prefWidth="120.0">
+      <Pane layoutY="33.0" prefHeight="41.0" prefWidth="601.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#102027" height="338.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="120.0">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Rectangle>
-            <JFXButton fx:id="userButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" style="-fx-background-color: #62727B;" text="Usuarios" textFill="WHITE" />
-            <JFXButton fx:id="examenButton" focusTraversable="false" layoutY="44.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Examen" textFill="WHITE" />
-            <JFXButton fx:id="resultButton" focusTraversable="false" layoutY="88.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Resultados" textFill="WHITE" />
+            <HBox prefHeight="41.0" prefWidth="601.0" style="-fx-background-color: #102027;">
+               <children>
+                  <JFXButton fx:id="userButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" style="-fx-background-color: #62727B;" text="Usuarios" textFill="WHITE" />
+                  <JFXButton fx:id="examenButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Examen" textFill="WHITE" />
+                  <JFXButton fx:id="resultButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Resultados" textFill="WHITE" />
+               </children>
+            </HBox>
          </children>
+      </Pane>
+      <Pane fx:id="userPane" layoutX="-1.0" layoutY="74.0" prefHeight="489.0" prefWidth="601.0">
+         <children>
+            <Group layoutX="65.0" layoutY="30.0">
+               <children>
+                  <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="202.0" layoutX="-31.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="534.0">
+                     <effect>
+                        <DropShadow color="#000000a5" />
+                     </effect>
+                  </Rectangle>
+                  <JFXTextField fx:id="nombreTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="27.0" layoutY="39.0" prefHeight="0.0" prefWidth="145.0" promptText="Nombre" unFocusColor="BLACK">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="apellidoTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="284.0" layoutY="39.0" prefHeight="0.0" prefWidth="145.0" promptText="Apellidos" unFocusColor="BLACK">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="usernameTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="27.0" layoutY="94.0" prefHeight="0.0" prefWidth="145.0" promptText="Username" unFocusColor="BLACK">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <JFXTextField fx:id="passwordTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="284.0" layoutY="94.0" prefHeight="0.0" prefWidth="145.0" promptText="Password" unFocusColor="BLACK">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <Button fx:id="registerUserButton" layoutX="174.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Registrar" />
+                  <Label layoutX="184.0" layoutY="-2.0" prefHeight="7.0" prefWidth="75.0" text="Registro">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Group>
+            <Group layoutX="75.0" layoutY="283.0">
+               <children>
+                  <TableView fx:id="tablaUsuarios" layoutX="-39.0" layoutY="-29.0" prefHeight="200.0" prefWidth="530.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </TableView>
+               </children>
+            </Group>
+         </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </Pane>
    </children>
 </AnchorPane>

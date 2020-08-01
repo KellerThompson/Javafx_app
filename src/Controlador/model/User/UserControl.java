@@ -5,6 +5,7 @@ import Controlador.model.Persona.Persona;
 import Controlador.model.Persona.PersonaControl;
 import Controlador.model.Resultados.ResultadosControl;
 
+import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.time.LocalDate;
 
@@ -18,16 +19,13 @@ public class UserControl
     private static String examenColumn = "examen";
     private static String fechaColumn = "fechaRegistro";
 
-    public static User registrar(Persona persona, String username, String password)
+    public static User registrar(Database db, Persona persona, String username, String password)
     {
         String date = Date.valueOf(LocalDate.now()).toString();
-        Database db = new Database();
-        db.conectar();
         db.executeInsert("insert into bfkbonwrvl7atwiehbto.User " +
                 "(idPersona, username, password, examen, fechaRegistro) " +
                 "values ("+persona.getId()+", '"+username+"', '"+password+"', " + false + ", '"+ date +"');");
         int idUsuario = db.getLastIDInserted(tabla, primaryKey);
-        db.cerrarConexion();
         return new User(idUsuario, persona, username,password, false, date);
     }
 
@@ -76,6 +74,83 @@ public class UserControl
                 "inner join User on Persona.idPersona = User.idPersona;");
         String[][] tabla = db.obtenerDatosTabla();
         db.cerrarConexion();
+
+        for(int i = 0; i < tabla.length; i++)
+        {
+            if(tabla[i][5].equals("1"))
+                tabla[i][5] = "Hecho";
+            else
+                tabla[i][5] = "Sin realizar";
+        }
+
         return tabla;
+    }
+
+    public static String[][] consultarUsuarios(Database db)
+    {
+        db.executeQuery("select Persona.idPersona, Persona.name, Persona.lastname, User.username, User.password, " +
+                "User.examen, User.fechaRegistro from Persona " +
+                "inner join User on Persona.idPersona = User.idPersona;");
+        String[][] tabla = db.obtenerDatosTabla();
+
+        for(int i = 0; i < tabla.length; i++)
+        {
+            if(tabla[i][5].equals("1"))
+                tabla[i][5] = "Hecho";
+            else
+                tabla[i][5] = "Sin realizar";
+        }
+
+        return tabla;
+    }
+
+    public static User updateUsername(int idPersona, String newUsername)
+    {
+        Database db = new Database();
+        db.conectar();
+        db.executeQuery("select idUser from bfkbonwrvl7atwiehbto.User where User.idPersona = "+idPersona+";");
+        String[][] idUser = db.obtenerDatosTabla();
+        db.executeInsert(
+                "update "+Database.dataBaseName+"."+tabla+" set "+usernameColumn+" = '"+newUsername+
+                        "' where "+primaryKey+" = "+idUser[0][0]+";");
+        User user = getByID(db, Integer.parseInt(idUser[0][0]));
+        db.cerrarConexion();
+        return user;
+    }
+
+    public static User updateUsername(Database db, int idPersona, String newUsername)
+    {
+        db.executeQuery("select idUser from bfkbonwrvl7atwiehbto.User where User.idPersona = "+idPersona+";");
+        String[][] idUser = db.obtenerDatosTabla();
+        db.executeInsert(
+                "update "+Database.dataBaseName+"."+tabla+" set "+usernameColumn+" = '"+newUsername+
+                        "' where "+primaryKey+" = "+idUser[0][0]+";");
+        User user = getByID(db, Integer.parseInt(idUser[0][0]));
+        return user;
+    }
+
+    public static User updatePassword(int idPersona, String newPassword)
+    {
+        Database db = new Database();
+        db.conectar();
+        db.executeQuery("select idUser from bfkbonwrvl7atwiehbto.User where User.idPersona = "+idPersona+";");
+        String[][] idUser = db.obtenerDatosTabla();
+        db.executeInsert(
+                "update "+Database.dataBaseName+"."+tabla+" set "+passwordColumn+" = '"+newPassword+
+                        "' where "+primaryKey+" = "+idUser[0][0]+";");
+        User user = getByID(db, Integer.parseInt(idUser[0][0]));
+        db.cerrarConexion();
+        return user;
+    }
+
+    public static User updatePassword(Database db, int idPersona, String newPassword)
+    {
+        db.executeQuery("select idUser from bfkbonwrvl7atwiehbto.User where User.idPersona = "+idPersona+";");
+        String[][] idUser = db.obtenerDatosTabla();
+        db.executeInsert(
+                "update "+Database.dataBaseName+"."+tabla+" set "+passwordColumn+" = '"+newPassword+
+                        "' where "+primaryKey+" = "+idUser[0][0]+";");
+        User user = getByID(db, Integer.parseInt(idUser[0][0]));
+        return user;
     }
 }

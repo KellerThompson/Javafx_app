@@ -23,6 +23,16 @@ public class PersonaControl
         return new Persona(idPersona, name, lastname);
     }
 
+    public static Persona registrar(Database db, String name, String lastname)
+    {
+        db.executeInsert(
+                "insert into " + Database.dataBaseName + "." + tabla + " " +
+                        "("+nameColumn+", "+lastnameColumn+") " +
+                        "values ('"+name+"','"+lastname+"');");
+        int idPersona = db.getLastIDInserted(tabla, primaryKey);
+        return new Persona(idPersona, name, lastname);
+    }
+
     private static Persona getByID(Database db, int idPersona)
     {
         db.executeQuery("SELECT * FROM "+Database.dataBaseName+"."+tabla+" where "+primaryKey+" = "+idPersona+";");
@@ -51,6 +61,15 @@ public class PersonaControl
         return persona;
     }
 
+    public static Persona updateName(Database db, int idPersona, String newname)
+    {
+        db.executeInsert(
+                "update "+Database.dataBaseName+"."+tabla+" set "+nameColumn+" = '"+newname+
+                        "' where "+primaryKey+" = "+idPersona+";");
+        Persona persona = getByID(db, idPersona);
+        return persona;
+    }
+
     public static Persona updateLastname(int idPersona, String lastname)
     {
         Database db = new Database();
@@ -63,6 +82,15 @@ public class PersonaControl
         return persona;
     }
 
+    public static Persona updateLastname(Database db, int idPersona, String lastname)
+    {
+        db.executeInsert(
+                "update "+Database.dataBaseName+"."+tabla+" set "+lastnameColumn+" = '"+lastname+
+                        "' where "+primaryKey+" = "+idPersona+";");
+        Persona persona = getByID(db, idPersona);
+        return persona;
+    }
+
     public static void delete(int idPersona)
     {
         Database db = new Database();
@@ -70,6 +98,12 @@ public class PersonaControl
         UserControl.deleteUsersByIdPersona(db, idPersona);
         db.borrarRegistro(tabla, primaryKey, idPersona+"");
         db.cerrarConexion();
+    }
+
+    public static void delete(Database db, int idPersona)
+    {
+        UserControl.deleteUsersByIdPersona(db, idPersona);
+        db.borrarRegistro(tabla, primaryKey, idPersona+"");
     }
 
     public static String[][] consultarTabla()
@@ -86,5 +120,15 @@ public class PersonaControl
     {
         String[] columnas = {primaryKey,nameColumn,lastnameColumn};
         return columnas;
+    }
+
+    public static String[][] getAllId()
+    {
+        Database db = new Database();
+        db.conectar();
+        db.executeQuery("SELECT Persona.idPersona FROM "+Database.dataBaseName+"."+tabla+";");
+        String[][] tabla = db.obtenerDatosTabla();
+        db.cerrarConexion();
+        return tabla;
     }
 }

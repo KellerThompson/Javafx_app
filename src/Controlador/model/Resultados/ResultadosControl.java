@@ -15,6 +15,9 @@ public class ResultadosControl
 
     public static void deleteUsersByIdUser(Database db, int idUser)
     {
+
+        db.borrarRegistro(tabla, idUserColumn, idUser + "");
+        /*
         db.executeQuery("SELECT "+primaryKey+" FROM "+Database.dataBaseName+"."+tabla+" " +
                 "where "+idUserColumn+" = "+idUser+";");
         String[][] tabla = db.obtenerDatosTabla();
@@ -24,5 +27,7 @@ public class ResultadosControl
             System.out.println("Delete resultado: " + tabla[i][0]);
             delete(db, Integer.parseInt(tabla[i][0]));
         }
+
+         */
     }
 }

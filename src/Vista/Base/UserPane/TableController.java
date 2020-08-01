@@ -6,39 +6,61 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.util.Callback;
 
+import static Vista.Base.UserPane.UpdateController.idPersonaSelected;
+import static Vista.Base.UserPane.UpdateController.nombrelabel;
+import static Vista.Base.UserPane.UpdateController.apellidolabel;
+import static Vista.Base.UserPane.UpdateController.usernamelabel;
+import static Vista.Base.UserPane.UpdateController.passwordlabel;
+
 public class TableController
 {
-    private static TableView tablaUsuarios;
-    private static String[] columnNames = {"ID", "Nombre", "Apellidos", "Usuario", "Password", "Examen", "Registro"};
+    public static TableView tablaUsuarios;
+    public static String[] columnasUser = {"ID", "Nombre", "Apellidos", "Usuario", "Password", "Examen", "Registro"};
+    public static String[][] usersTable;
 
-    public static void initialize(TableView tabla)
+    public static void initTableUser(TableView tabla)
     {
         tablaUsuarios = tabla;
-        //tablaUsuarios.setEditable(false);
-        addColumns(columnNames);
-        actualizarTabla();
+
+        usersTable = UserControl.consultarUsuarios();
+        addColumns(tablaUsuarios, columnasUser);
+        actualizarTabla(tablaUsuarios, usersTable);
+        tabla.setRowFactory(tv ->
+        {
+            TableRow<String> row = new TableRow<>();
+            row.setOnMouseClicked(event ->
+            {
+                String[] values = tabla.getSelectionModel().getSelectedItem().toString().split(",");
+                idPersonaSelected = Integer.parseInt(values[0].substring(1, values[0].length()));
+                nombrelabel.setText(values[1]);
+                apellidolabel.setText(values[2]);
+                usernamelabel.setText(values[3]);
+                passwordlabel.setText(values[4]);
+            });
+            return row;
+        });
     }
 
-    public static void actualizarTabla()
+    public static void actualizarTabla(TableView tabla, String[][] datos)
     {
         ObservableList<ObservableList> data = FXCollections.observableArrayList();
-        String[][] users = UserControl.consultarUsuarios();
-        for(int i = 0; i < users.length; i++) // filas
+        for(int i = 0; i < datos.length; i++) // filas
         {
             ObservableList<String> row = FXCollections.observableArrayList();
-            for(int e = 0; e < users[0].length; e++) //columnas
+            for(int e = 0; e < datos[0].length; e++) //columnas
             {
-                row.add(users[i][e]);
+                row.add(datos[i][e]);
             }
             data.add(row);
         }
-        tablaUsuarios.setItems(data);
+        tabla.setItems(data);
     }
 
-    private static void addColumns(String[] column)
+    private static void addColumns(TableView tabla, String[] column)
     {
         for (int i = 0; i < column.length; i++)
         {
@@ -53,7 +75,7 @@ public class TableController
                 }
             });
 
-            tablaUsuarios.getColumns().addAll(col);
+            tabla.getColumns().addAll(col);
         }
     }
 }

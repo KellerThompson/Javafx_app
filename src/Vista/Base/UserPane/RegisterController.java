@@ -1,5 +1,6 @@
 package Vista.Base.UserPane;
 
+import Controlador.DataBase.Database;
 import Controlador.model.Persona.Persona;
 import Controlador.model.Persona.PersonaControl;
 import Controlador.model.User.User;
@@ -8,7 +9,11 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
+
+import static Vista.Base.UserPane.TableController.tablaUsuarios;
+import static Vista.Base.UserPane.TableController.usersTable;
 
 public class RegisterController
 {
@@ -21,7 +26,7 @@ public class RegisterController
         setValidators(usernameTextfield);
         setValidators(passwordTextfield);
 
-        registerUserButton.onActionProperty().setValue(event -> {
+        registerUserButton.onActionProperty().setValue((ActionEvent event) -> {
             registrar(nombreTextfield, apellidoTextfield, usernameTextfield, passwordTextfield);
         });
     }
@@ -37,16 +42,18 @@ public class RegisterController
             String username = usernameTextfield.getText();
             String password = passwordTextfield.getText();
 
-            Persona persona = PersonaControl.registrar(nombre, apellidos);
-            User user = UserControl.registrar(persona, username, password);
-            System.out.println(user);
-
+            Database db = new Database();
+            db.conectar();
+            Persona persona = PersonaControl.registrar(db, nombre, apellidos);
+            User user = UserControl.registrar(db, persona, username, password);
             nombreTextfield.setText("");
             apellidoTextfield.setText("");
             usernameTextfield.setText("");
             passwordTextfield.setText("");
+            usersTable = UserControl.consultarUsuarios(db);
+            db.cerrarConexion();
 
-            TableController.actualizarTabla();
+            TableController.actualizarTabla(tablaUsuarios, usersTable);
         }
     }
 

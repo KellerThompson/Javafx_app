@@ -33,7 +33,7 @@ public class PersonaControl
         return new Persona(idPersona, name, lastname);
     }
 
-    private static Persona getByID(Database db, int idPersona)
+    public static Persona getByID(Database db, int idPersona)
     {
         db.executeQuery("SELECT * FROM "+Database.dataBaseName+"."+tabla+" where "+primaryKey+" = "+idPersona+";");
         String[][] personaString = db.obtenerDatosTabla();

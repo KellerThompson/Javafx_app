@@ -5,6 +5,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -46,10 +47,80 @@
             <HBox prefHeight="41.0" prefWidth="1000.0" style="-fx-background-color: #102027;">
                <children>
                   <JFXButton fx:id="userButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" style="-fx-background-color: #62727B;" text="Usuarios" textFill="WHITE" />
+                  <JFXButton fx:id="asignacionButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Asiganción" textFill="WHITE" />
                   <JFXButton fx:id="examenButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Examen" textFill="WHITE" />
-                  <JFXButton fx:id="resultButton" focusTraversable="false" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Resultados" textFill="WHITE" />
+                  <JFXButton fx:id="resultButton" focusTraversable="false" layoutX="250.0" layoutY="10.0" prefHeight="40.0" prefWidth="120.0" ripplerFill="#9ce8d1" text="Resultados" textFill="WHITE" />
                </children>
             </HBox>
+         </children>
+      </Pane>
+      <Pane fx:id="examenPane" layoutX="-1.0" layoutY="74.0" prefHeight="490.0" prefWidth="1000.0">
+         <children>
+            <Group layoutX="64.0" layoutY="30.0">
+               <children>
+                  <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="202.0" layoutX="-31.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="534.0">
+                     <effect>
+                        <DropShadow color="#000000a5" />
+                     </effect>
+                  </Rectangle>
+                  <JFXTextField fx:id="examenLinkTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="179.0" layoutY="77.0" prefHeight="17.0" prefWidth="301.0" promptText="Link del Examen" unFocusColor="BLACK">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </JFXTextField>
+                  <Button fx:id="examenRegisterButton" layoutX="176.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Registrar" />
+                  <Label layoutX="103.0" layoutY="-2.0" prefHeight="30.0" prefWidth="267.0" text="Registro de Link para Examen">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="examenTituloTextfield" alignment="TOP_LEFT" focusColor="BLACK" labelFloat="true" layoutX="-19.0" layoutY="77.0" prefHeight="17.0" prefWidth="168.0" promptText="Titulo del Examen" unFocusColor="BLACK">
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </JFXTextField>
+               </children>
+            </Group>
+            <Group layoutX="72.0" layoutY="283.0">
+               <children>
+                  <TableView fx:id="tablaExamenes" layoutX="-39.0" layoutY="-29.0" prefHeight="200.0" prefWidth="556.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </TableView>
+               </children>
+            </Group>
+            <Group layoutX="611.0" layoutY="25.0">
+               <children>
+                  <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="429.0" stroke="BLACK" strokeType="INSIDE" width="371.0">
+                     <effect>
+                        <DropShadow color="#000000a5" />
+                     </effect>
+                  </Rectangle>
+                  <Label layoutX="96.0" layoutY="19.0" text="Actualización de datos">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="deleteLinkButton" layoutX="135.0" layoutY="356.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="121.0" text="Eliminar Examen" />
+                  <Group layoutX="19.0" layoutY="195.0">
+                     <children>
+                        <TextField fx:id="updateLinkTextfield" layoutY="28.0" prefHeight="25.0" prefWidth="333.0" />
+                        <Button fx:id="updatelinkButton" layoutX="4.0" layoutY="59.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Actualizar" />
+                        <Label layoutX="3.0" text="Link:" />
+                        <Label fx:id="linklabel" layoutX="31.0" prefHeight="17.0" prefWidth="271.0" />
+                     </children>
+                  </Group>
+                  <Group layoutX="19.0" layoutY="82.0">
+                     <children>
+                        <TextField fx:id="updatetituloTextfield" layoutY="28.0" prefHeight="25.0" prefWidth="333.0" />
+                        <Button fx:id="updatetituloButton" layoutX="4.0" layoutY="59.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="98.0" text="Actualizar" />
+                        <Label layoutX="3.0" text="Titulo: " />
+                        <Label fx:id="titulolabel" layoutX="39.0" prefHeight="17.0" prefWidth="271.0" />
+                     </children>
+                  </Group>
+               </children>
+            </Group>
          </children>
       </Pane>
       <Pane fx:id="userPane" layoutX="-1.0" layoutY="74.0" prefHeight="489.0" prefWidth="1000.0">
@@ -112,32 +183,32 @@
                   </Label>
                   <Group layoutX="25.0" layoutY="63.0">
                      <children>
-                        <TextField fx:id="updateNameTextfield" layoutY="28.0" />
-                        <Button fx:id="updateNameButton" layoutX="164.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
+                        <TextField fx:id="updateNameTextfield" layoutY="28.0" prefHeight="25.0" prefWidth="231.0" />
+                        <Button fx:id="updateNameButton" layoutX="244.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
                         <Label layoutX="3.0" text="Nombre: " />
                         <Label fx:id="nombrelabel" layoutX="61.0" prefHeight="17.0" prefWidth="167.0" />
                      </children>
                   </Group>
                   <Group layoutX="25.0" layoutY="127.0">
                      <children>
-                        <TextField fx:id="updateApellidposTextfield" layoutY="28.0" />
-                        <Button fx:id="updateApellidposButton" layoutX="164.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
+                        <TextField fx:id="updateApellidposTextfield" layoutY="28.0" prefWidth="231.0" />
+                        <Button fx:id="updateApellidposButton" layoutX="244.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
                         <Label layoutX="3.0" text="Apellidos:" />
                         <Label fx:id="apellidolabel" layoutX="61.0" prefHeight="17.0" prefWidth="167.0" />
                      </children>
                   </Group>
                   <Group layoutX="25.0" layoutY="196.0">
                      <children>
-                        <TextField fx:id="updateUserameTextfield" layoutY="28.0" />
-                        <Button fx:id="updateUserameButton" layoutX="164.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
+                        <TextField fx:id="updateUserameTextfield" layoutY="28.0" prefWidth="231.0" />
+                        <Button fx:id="updateUserameButton" layoutX="244.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
                         <Label layoutX="3.0" text="Usuario:" />
                         <Label fx:id="usernamelabel" layoutX="61.0" prefHeight="17.0" prefWidth="167.0" />
                      </children>
                   </Group>
                   <Group layoutX="25.0" layoutY="261.0">
                      <children>
-                        <TextField fx:id="updatePasswordTextfield" layoutY="28.0" />
-                        <Button fx:id="updatePaswordButton" layoutX="164.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
+                        <TextField fx:id="updatePasswordTextfield" layoutY="28.0" prefWidth="231.0" />
+                        <Button fx:id="updatePaswordButton" layoutX="244.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
                         <Label layoutX="3.0" text="Password" />
                         <Label fx:id="passwordlabel" layoutX="61.0" prefHeight="17.0" prefWidth="167.0" />
                      </children>
@@ -149,6 +220,38 @@
          <effect>
             <InnerShadow />
          </effect>
+      </Pane>
+      <Pane fx:id="asignacionPane" layoutY="74.0" prefHeight="489.0" prefWidth="1000.0">
+         <children>
+            <Group layoutX="63.0" layoutY="30.0">
+               <children>
+                  <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="202.0" layoutX="-31.0" layoutY="-7.0" stroke="BLACK" strokeType="INSIDE" width="534.0">
+                     <effect>
+                        <DropShadow color="#000000a5" />
+                     </effect>
+                  </Rectangle>
+                  <Button fx:id="asignacionRegisterButton" layoutX="174.0" layoutY="152.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Asignar" />
+                  <Label layoutX="117.0" layoutY="-2.0" prefHeight="30.0" prefWidth="238.0" text="Asignar examen a usuario">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <ComboBox fx:id="asignacionUsuarioCombobox" layoutX="16.0" layoutY="82.0" prefWidth="150.0" />
+                  <ComboBox fx:id="asignacionExamenCombobox" layoutX="311.0" layoutY="82.0" prefWidth="150.0" />
+                  <Label layoutX="16.0" layoutY="61.0" text="Usuario" />
+                  <Label layoutX="311.0" layoutY="61.0" text="Examen" />
+               </children>
+            </Group>
+            <Group layoutX="71.0" layoutY="283.0">
+               <children>
+                  <TableView fx:id="tablaAsignacion" layoutX="-39.0" layoutY="-29.0" prefHeight="200.0" prefWidth="556.0">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                  </TableView>
+               </children>
+            </Group>
+         </children>
       </Pane>
    </children>
 </AnchorPane>

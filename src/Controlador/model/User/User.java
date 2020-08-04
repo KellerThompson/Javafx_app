@@ -8,15 +8,13 @@ public class User
     private Persona persona;
     private String username;
     private String password;
-    private boolean examen;
     private String fechaRegistro;
 
-    public User(int id, Persona persona, String username, String password, boolean examen, String fechaRegistro) {
+    public User(int id, Persona persona, String username, String password, String fechaRegistro) {
         this.id = id;
         this.persona = persona;
         this.username = username;
         this.password = password;
-        this.examen = examen;
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -52,14 +50,6 @@ public class User
         this.password = password;
     }
 
-    public boolean isExamen() {
-        return examen;
-    }
-
-    public void setExamen(boolean examen) {
-        this.examen = examen;
-    }
-
     public String getFechaRegistro() {
         return fechaRegistro;
     }
@@ -75,7 +65,6 @@ public class User
                 ", Persona=" + persona.toString() +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", examen=" + examen +
                 ", fechaRegistro=" + fechaRegistro +
                 '}';
     }

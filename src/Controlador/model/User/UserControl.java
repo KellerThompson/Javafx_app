@@ -1,6 +1,7 @@
 package Controlador.model.User;
 
 import Controlador.DataBase.Database;
+import Controlador.Util.UtilK;
 import Controlador.model.Persona.Persona;
 import Controlador.model.Persona.PersonaControl;
 import Controlador.model.Resultados.ResultadosControl;
@@ -23,18 +24,18 @@ public class UserControl
     {
         String date = Date.valueOf(LocalDate.now()).toString();
         db.executeInsert("insert into bfkbonwrvl7atwiehbto.User " +
-                "(idPersona, username, password, examen, fechaRegistro) " +
-                "values ("+persona.getId()+", '"+username+"', '"+password+"', " + false + ", '"+ date +"');");
+                "(idPersona, username, password, fechaRegistro) " +
+                "values ("+persona.getId()+", '"+username+"', '"+password+"', '"+ date +"');");
         int idUsuario = db.getLastIDInserted(tabla, primaryKey);
-        return new User(idUsuario, persona, username,password, false, date);
+        return new User(idUsuario, persona, username,password, date);
     }
 
     private static User getByID(Database db, int idUser)
     {
         db.executeQuery("SELECT * FROM "+Database.dataBaseName+"."+tabla+" where "+primaryKey+" = "+idUser+";");
         String[][] userString = db.obtenerDatosTabla();
-        return new User(Integer.parseInt(userString[0][0]), PersonaControl.getByID(Integer.parseInt(userString[0][1])),
-                userString[0][2], userString[0][3], Boolean.parseBoolean(userString[0][4]), userString[0][5]);
+        return new User(Integer.parseInt(userString[0][0]), PersonaControl.getByID(db, Integer.parseInt(userString[0][1])),
+                userString[0][2], userString[0][3], userString[0][4]);
     }
 
     public static User getByID(int iduser)
@@ -65,41 +66,13 @@ public class UserControl
         }
     }
 
-    public static String[][] consultarUsuarios()
-    {
-        Database db = new Database();
-        db.conectar();
-        db.executeQuery("select Persona.idPersona, Persona.name, Persona.lastname, User.username, User.password, " +
-                "User.examen, User.fechaRegistro from Persona " +
-                "inner join User on Persona.idPersona = User.idPersona;");
-        String[][] tabla = db.obtenerDatosTabla();
-        db.cerrarConexion();
-
-        for(int i = 0; i < tabla.length; i++)
-        {
-            if(tabla[i][5].equals("1"))
-                tabla[i][5] = "Hecho";
-            else
-                tabla[i][5] = "Sin realizar";
-        }
-
-        return tabla;
-    }
-
     public static String[][] consultarUsuarios(Database db)
     {
-        db.executeQuery("select Persona.idPersona, Persona.name, Persona.lastname, User.username, User.password, " +
-                "User.examen, User.fechaRegistro from Persona " +
+        db.executeQuery(
+                "select Persona.idPersona, Persona.name, Persona.lastname, User.username, User.password, " +
+                "User.fechaRegistro from Persona " +
                 "inner join User on Persona.idPersona = User.idPersona;");
         String[][] tabla = db.obtenerDatosTabla();
-
-        for(int i = 0; i < tabla.length; i++)
-        {
-            if(tabla[i][5].equals("1"))
-                tabla[i][5] = "Hecho";
-            else
-                tabla[i][5] = "Sin realizar";
-        }
 
         return tabla;
     }

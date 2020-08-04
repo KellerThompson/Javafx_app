@@ -1,18 +1,13 @@
-package Vista.Base.UserPane;
+package Vista.UserPane;
 
 import Controlador.DataBase.Database;
 import Controlador.model.Persona.PersonaControl;
 import Controlador.model.User.UserControl;
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.validation.RequiredFieldValidator;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import Vista.AsignacionPane.AsignacionRegisterController;
+import Vista.Table.TableController;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
-import static Vista.Base.UserPane.TableController.usersTable;
-import static Vista.Base.UserPane.TableController.tablaUsuarios;
 
 public class UpdateController
 {
@@ -34,18 +29,22 @@ public class UpdateController
 
     private static void initDeleteButton(Button deleteButton)
     {
-           deleteButton.onActionProperty().setValue(event -> {
-               Database db = new Database();
-               db.conectar();
-               PersonaControl.delete(db, idPersonaSelected);
-               usersTable = UserControl.consultarUsuarios(db);
-               db.cerrarConexion();
-               TableController.actualizarTabla(tablaUsuarios, usersTable);
-               idPersonaSelected = -1;
-               nombrelabel.setText("");
-               apellidolabel.setText("");
-               usernamelabel.setText("");
-               passwordlabel.setText("");
+           deleteButton.onActionProperty().setValue(event ->
+           {
+               if(idPersonaSelected > 0)
+               {
+                   Database db = new Database();
+                   db.conectar();
+                   PersonaControl.delete(db, idPersonaSelected);
+                   TableController.actualizarTablaUser(db);
+                   db.cerrarConexion();
+                   AsignacionRegisterController.actualizarUserCombobox();
+                   idPersonaSelected = -1;
+                   nombrelabel.setText("");
+                   apellidolabel.setText("");
+                   usernamelabel.setText("");
+                   passwordlabel.setText("");
+               }
            });
     }
 
@@ -69,6 +68,7 @@ public class UpdateController
                     case username:
                         UserControl.updateUsername(db, idPersonaSelected, textField.getText());
                         usernamelabel.setText(textField.getText());
+                        AsignacionRegisterController.actualizarUserCombobox();
                         break;
                     case password:
                         UserControl.updatePassword(db, idPersonaSelected, textField.getText());
@@ -77,9 +77,8 @@ public class UpdateController
                     default:
                         break;
                 }
-                usersTable = UserControl.consultarUsuarios(db);
+                TableController.actualizarTablaUser(db);
                 db.cerrarConexion();
-                TableController.actualizarTabla(tablaUsuarios, usersTable);
             }
             textField.setText("");
         });
@@ -89,20 +88,4 @@ public class UpdateController
     {
         name, lastname, username, password
     }
-
-    /*
-    private static void initComboBox()
-    {
-       comboBox.getSelectionModel().selectedItemProperty().addListener(
-               (ObservableValue options, Object oldValue, Object newValue) ->
-                   System.out.println(newValue));
-    }
-    public static void actualizarComboBox()
-    {
-        ObservableList<String> IDs = FXCollections.observableArrayList();
-        for(int i = 0; i < usersTable.length; i++)
-            IDs.add(usersTable[i][0]);
-        comboBox.itemsProperty().setValue(IDs);
-    }
-    */
 }

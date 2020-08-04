@@ -23,6 +23,7 @@ public class Inicio extends Application
         catch(Exception ex)
         {
             ex.printStackTrace();
+            System.exit(2);
         }
     }
 }

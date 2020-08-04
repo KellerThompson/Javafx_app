@@ -1,19 +1,17 @@
-package Vista.Base.UserPane;
+package Vista.UserPane;
 
 import Controlador.DataBase.Database;
 import Controlador.model.Persona.Persona;
 import Controlador.model.Persona.PersonaControl;
-import Controlador.model.User.User;
 import Controlador.model.User.UserControl;
+import Vista.AsignacionPane.AsignacionRegisterController;
+import Vista.Table.TableController;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.RequiredFieldValidator;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-
-import static Vista.Base.UserPane.TableController.tablaUsuarios;
-import static Vista.Base.UserPane.TableController.usersTable;
 
 public class RegisterController
 {
@@ -26,9 +24,8 @@ public class RegisterController
         setValidators(usernameTextfield);
         setValidators(passwordTextfield);
 
-        registerUserButton.onActionProperty().setValue((ActionEvent event) -> {
-            registrar(nombreTextfield, apellidoTextfield, usernameTextfield, passwordTextfield);
-        });
+        registerUserButton.onActionProperty().setValue((ActionEvent event) ->
+            registrar(nombreTextfield, apellidoTextfield, usernameTextfield, passwordTextfield));
     }
 
     private static void registrar(JFXTextField nombreTextfield, JFXTextField apellidoTextfield,
@@ -45,19 +42,18 @@ public class RegisterController
             Database db = new Database();
             db.conectar();
             Persona persona = PersonaControl.registrar(db, nombre, apellidos);
-            User user = UserControl.registrar(db, persona, username, password);
+            UserControl.registrar(db, persona, username, password);
             nombreTextfield.setText("");
             apellidoTextfield.setText("");
             usernameTextfield.setText("");
             passwordTextfield.setText("");
-            usersTable = UserControl.consultarUsuarios(db);
+            TableController.actualizarTablaUser(db);
             db.cerrarConexion();
-
-            TableController.actualizarTabla(tablaUsuarios, usersTable);
+            AsignacionRegisterController.actualizarUserCombobox();
         }
     }
 
-    private static void setValidators(JFXTextField textField)
+    public static void setValidators(JFXTextField textField)
     {
         RequiredFieldValidator validator = new RequiredFieldValidator();
         validator.setMessage("Campo obligatorio");

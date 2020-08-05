@@ -10,11 +10,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
 import static Vista.Table.TableController.*;
+import static Vista.AsignacionPane.AsignacionUpdateController.updateExamenSelected;
 
 public class AsignacionRegisterController
 {
     public static ComboBox asignacionUsuarioCombobox;
     public static ComboBox asignacionExamenCombobox;
+    public static ComboBox updateAsignacionExamenCombobox;
 
     private static String usuarioSelected = "";
     private static String exameneSelected = "";
@@ -32,6 +34,13 @@ public class AsignacionRegisterController
 
         asignacionRegisterButton.onActionProperty().setValue((ActionEvent event) ->
                 registrar());
+    }
+
+    public static void initialize(ComboBox updateAsignacionExamenCombobox1)
+    {
+        updateAsignacionExamenCombobox = updateAsignacionExamenCombobox1;
+        initComboBox(updateAsignacionExamenCombobox, comboBoxType.update);
+        actualizarComboBox(updateAsignacionExamenCombobox, ExamData, 1);
     }
 
     private static void registrar()
@@ -60,22 +69,23 @@ public class AsignacionRegisterController
                    {
                        case usuario:
                            usuarioSelected = newValue.toString();
-                           System.out.println(usuarioSelected);
                            break;
                        case examen:
                            exameneSelected = newValue.toString();
-                           System.out.println(exameneSelected);
+                           break;
+                       case update:
+                           updateExamenSelected = newValue.toString();
                            break;
                        default:
                            break;
                    }
                });
-
     }
 
     public static void actualizarExamenCombobox()
     {
         actualizarComboBox(asignacionExamenCombobox, ExamData, 1);
+        actualizarComboBox(updateAsignacionExamenCombobox, ExamData, 1);
     }
 
     public static void actualizarUserCombobox()
@@ -93,6 +103,6 @@ public class AsignacionRegisterController
 
     enum comboBoxType
     {
-        usuario, examen
+        usuario, examen, update
     }
 }

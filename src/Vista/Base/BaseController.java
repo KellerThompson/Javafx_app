@@ -1,6 +1,7 @@
 package Vista.Base;
 
 import Vista.AsignacionPane.AsignacionRegisterController;
+import Vista.AsignacionPane.AsignacionUpdateController;
 import Vista.Table.TableController;
 import Vista.ExamenPane.RegisterExamenController;
 import Vista.ExamenPane.UpdateExamenController;
@@ -88,6 +89,12 @@ public class BaseController
 
     @FXML private TableView tablaAsignacion;
 
+    @FXML private Label examenAsignadoLabel;
+    @FXML private ComboBox updateAsignacionExamenCombobox;
+    @FXML private Button updateAsignacionButton;
+
+    @FXML private Button deleteAsignacionButton;
+
     public void initialize()
     {
         //------------------------------------- Panel Superior -----------------------------------------------------
@@ -96,16 +103,17 @@ public class BaseController
         PanelSuperior.initialize(labelM, shadowLabelM, 2);
 
         //------------------------------------- Seleccion Pane -----------------------------------------------------
-        SelectionPane.initialize(
-                userButton, examenButton, asignacionButton, resultButton,
-                userPane, examenPane, asignacionPane);
+        SelectionPane
+                .initialize(userButton, examenButton, asignacionButton, resultButton,
+                        userPane, examenPane, asignacionPane);
 
-        // ------------------------------------ User Pane ----------------------------------------------------------
-        RegisterController.initialize(
-                nombreTextfield, apellidoTextfield, usernameTextfield, passwordTextfield,
-                registerUserButton);
-
+        //------------------------------------- Init Tablas -------------------------------------------------------
         TableController.initTables(tablaUsuarios, tablaExamenes, tablaAsignacion);
+
+        // ------------------------------------ User Pane ---------------------------------------------------------
+        RegisterController
+                .initialize(nombreTextfield, apellidoTextfield, usernameTextfield,
+                        passwordTextfield, registerUserButton);
 
         UpdateController.initialize(nombrelabel, apellidolabel, usernamelabel, passwordlabel, deleteButton);
         UpdateController.initUpdate(updateNameButton, updateNameTextfield, name);
@@ -115,13 +123,19 @@ public class BaseController
 
         //------------------------------------ Examen Pane --------------------------------------------------------
         RegisterExamenController.initialize(examenLinkTextfield, examenTituloTextfield, examenRegisterButton);
+
         UpdateExamenController.initialize(linklabel, titulolabel, deleteLinkButton);
         UpdateExamenController.initUpdate(updatelinkButton, updateLinkTextfield, link);
         UpdateExamenController.initUpdate(updatetituloButton, updatetituloTextfield, titulo);
 
-        //-----------------------------------  Asignacion Pane -----------------------------------------------------
+        //-----------------------------------  Asignacion Pane ----------------------------------------------------
 
-        AsignacionRegisterController.initialize(asignacionUsuarioCombobox, asignacionExamenCombobox, asignacionRegisterButton);
+        AsignacionRegisterController
+                .initialize(asignacionUsuarioCombobox, asignacionExamenCombobox, asignacionRegisterButton);
+
+        AsignacionUpdateController.initialize(deleteAsignacionButton, examenAsignadoLabel);
+        AsignacionRegisterController.initialize(updateAsignacionExamenCombobox);
+        AsignacionUpdateController.initUpdate(updateAsignacionButton);
     }
 }
 

@@ -21,6 +21,9 @@ import static Vista.ExamenPane.UpdateExamenController.idExamenSelected;
 import static Vista.ExamenPane.UpdateExamenController.linklabel;
 import static Vista.ExamenPane.UpdateExamenController.titulolabel;
 
+import static Vista.AsignacionPane.AsignacionUpdateController.idAsignacionSelected;
+import static Vista.AsignacionPane.AsignacionUpdateController.examenAsignadoLabel;
+
 public class TableController
 {
     public static TableView tablaUsuarios;
@@ -76,6 +79,18 @@ public class TableController
                 idExamenSelected = Integer.parseInt(values[0].substring(1));
                 titulolabel.setText(values[1]);
                 linklabel.setText(values[2].substring(0, values[2].length() - 1));
+            });
+            return row;
+        });
+
+        tablaAsig.setRowFactory(tv ->
+        {
+            TableRow<String> row = new TableRow<>();
+            row.setOnMouseClicked(event ->
+            {
+                String[] values = tablaAsig.getSelectionModel().getSelectedItem().toString().split(",");
+                idAsignacionSelected = Integer.parseInt(values[0].substring(1));
+                examenAsignadoLabel.setText(values[2]);
             });
             return row;
         });

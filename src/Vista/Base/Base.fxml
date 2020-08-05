@@ -251,6 +251,29 @@
                   </TableView>
                </children>
             </Group>
+            <Group layoutX="610.0" layoutY="25.0">
+               <children>
+                  <Rectangle arcHeight="15.0" arcWidth="15.0" fill="WHITE" height="429.0" stroke="BLACK" strokeType="INSIDE" width="371.0">
+                     <effect>
+                        <DropShadow color="#000000a5" />
+                     </effect>
+                  </Rectangle>
+                  <Label layoutX="96.0" layoutY="19.0" text="Actualización de datos">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                  <Group layoutX="20.0" layoutY="119.0">
+                     <children>
+                        <Button fx:id="updateAsignacionButton" layoutX="244.0" layoutY="28.0" mnemonicParsing="false" text="Actualizar" />
+                        <Label layoutX="3.0" text="Examen: " />
+                        <Label fx:id="examenAsignadoLabel" layoutX="61.0" prefHeight="17.0" prefWidth="167.0" />
+                        <ComboBox fx:id="updateAsignacionExamenCombobox" layoutX="3.0" layoutY="28.0" prefHeight="25.0" prefWidth="219.0" />
+                     </children>
+                  </Group>
+                  <Button fx:id="deleteAsignacionButton" layoutX="126.0" layoutY="362.0" mnemonicParsing="false" text="Eliminar Asignación" />
+               </children>
+            </Group>
          </children>
       </Pane>
    </children>

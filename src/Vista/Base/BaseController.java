@@ -2,6 +2,7 @@ package Vista.Base;
 
 import Vista.AsignacionPane.AsignacionRegisterController;
 import Vista.AsignacionPane.AsignacionUpdateController;
+import Vista.ResultadoPane.ResultController;
 import Vista.Table.TableController;
 import Vista.ExamenPane.RegisterExamenController;
 import Vista.ExamenPane.UpdateExamenController;
@@ -95,6 +96,15 @@ public class BaseController
 
     @FXML private Button deleteAsignacionButton;
 
+    //----- Panel Resultados ----------------------------------------
+    @FXML private Pane resultsPane;
+
+    @FXML private ComboBox resultExamenCombobox;
+    @FXML private ComboBox resultUserCombobox;
+    @FXML private ComboBox resultMateriaCombobox;
+
+    @FXML private Button updateGrafica;
+
     public void initialize()
     {
         //------------------------------------- Panel Superior -----------------------------------------------------
@@ -105,7 +115,7 @@ public class BaseController
         //------------------------------------- Seleccion Pane -----------------------------------------------------
         SelectionPane
                 .initialize(userButton, examenButton, asignacionButton, resultButton,
-                        userPane, examenPane, asignacionPane);
+                        userPane, examenPane, asignacionPane, resultsPane);
 
         //------------------------------------- Init Tablas -------------------------------------------------------
         TableController.initTables(tablaUsuarios, tablaExamenes, tablaAsignacion);
@@ -129,13 +139,16 @@ public class BaseController
         UpdateExamenController.initUpdate(updatetituloButton, updatetituloTextfield, titulo);
 
         //-----------------------------------  Asignacion Pane ----------------------------------------------------
-
         AsignacionRegisterController
                 .initialize(asignacionUsuarioCombobox, asignacionExamenCombobox, asignacionRegisterButton);
 
         AsignacionUpdateController.initialize(deleteAsignacionButton, examenAsignadoLabel);
         AsignacionRegisterController.initialize(updateAsignacionExamenCombobox);
         AsignacionUpdateController.initUpdate(updateAsignacionButton);
+
+        //-----------------------------------  Resultado Pane ------------------------------------------------------
+
+        ResultController.initialize(resultExamenCombobox, resultUserCombobox, resultMateriaCombobox, updateGrafica);
     }
 }
 

@@ -15,11 +15,12 @@ public class SelectionPane
     private static Pane asignacionPane;
 
     private static JFXButton resultButton;
+    private static Pane resultsPane;
 
     private static buttonType buttonselected;
 
     public static void initialize(JFXButton userButton1, JFXButton examenButton1, JFXButton asigancionButton1, JFXButton resultButton1,
-                                  Pane userPane1, Pane examenPane1, Pane asigancionPane1)
+                                  Pane userPane1, Pane examenPane1, Pane asigancionPane1, Pane resultsPane1)
     {
         userButton = userButton1;
         userPane = userPane1;
@@ -31,6 +32,7 @@ public class SelectionPane
         asignacionPane = asigancionPane1;
 
         resultButton = resultButton1;
+        resultsPane = resultsPane1;
 
         initlateralButton(userButton, buttonType.user);
         initlateralButton(examenButton, buttonType.examen);
@@ -70,6 +72,7 @@ public class SelectionPane
                     asignacionPane.visibleProperty().setValue(false);
 
                     resultButton.setStyle("-fx-background-color: #102027;");
+                    resultsPane.visibleProperty().setValue(false);
                     break;
 
                 case examen:
@@ -85,6 +88,7 @@ public class SelectionPane
                     asignacionPane.visibleProperty().setValue(false);
 
                     resultButton.setStyle("-fx-background-color: #102027;");
+                    resultsPane.visibleProperty().setValue(false);
                     break;
 
                 case asignacion:
@@ -100,6 +104,7 @@ public class SelectionPane
                     asignacionPane.visibleProperty().setValue(true);
 
                     resultButton.setStyle("-fx-background-color: #102027;");
+                    resultsPane.visibleProperty().setValue(false);
                     break;
 
                 case result:
@@ -115,6 +120,7 @@ public class SelectionPane
                     asignacionPane.visibleProperty().setValue(false);
 
                     resultButton.setStyle("-fx-background-color: #81B0A9;");
+                    resultsPane.visibleProperty().setValue(true);
                     break;
 
                 default:
@@ -127,6 +133,7 @@ public class SelectionPane
         userPane.visibleProperty().setValue(true);
         examenPane.visibleProperty().setValue(false);
         asignacionPane.visibleProperty().setValue(false);
+        resultsPane.visibleProperty().setValue(false);
     }
 
     enum buttonType

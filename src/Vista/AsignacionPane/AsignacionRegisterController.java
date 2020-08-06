@@ -1,6 +1,7 @@
 package Vista.AsignacionPane;
 
 import Controlador.DataBase.Database;
+import Vista.ResultadoPane.ResultController;
 import Vista.Table.TableController;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -39,7 +40,7 @@ public class AsignacionRegisterController
     public static void initialize(ComboBox updateAsignacionExamenCombobox1)
     {
         updateAsignacionExamenCombobox = updateAsignacionExamenCombobox1;
-        initComboBox(updateAsignacionExamenCombobox, comboBoxType.update);
+        initComboBox(updateAsignacionExamenCombobox, comboBoxType.updateExamenAsignacion);
         actualizarComboBox(updateAsignacionExamenCombobox, ExamData, 1);
     }
 
@@ -73,7 +74,7 @@ public class AsignacionRegisterController
                        case examen:
                            exameneSelected = newValue.toString();
                            break;
-                       case update:
+                       case updateExamenAsignacion:
                            updateExamenSelected = newValue.toString();
                            break;
                        default:
@@ -86,23 +87,26 @@ public class AsignacionRegisterController
     {
         actualizarComboBox(asignacionExamenCombobox, ExamData, 1);
         actualizarComboBox(updateAsignacionExamenCombobox, ExamData, 1);
+        ResultController.actualizarResultExamenComboBox();
     }
 
     public static void actualizarUserCombobox()
     {
         actualizarComboBox(asignacionUsuarioCombobox, usersData, 3);
+        ResultController.actualizarResultUserComboBox();
     }
 
     private static void actualizarComboBox(ComboBox comboBox, String[][] data, int indexColumn)
     {
-        ObservableList<String> IDs = FXCollections.observableArrayList();
+        ObservableList<String> items = FXCollections.observableArrayList();
         for(int i = 0; i < data.length; i++)
-            IDs.add(data[i][indexColumn]);
-        comboBox.itemsProperty().setValue(IDs);
+            items.add(data[i][indexColumn]);
+        comboBox.itemsProperty().setValue(items);
+        comboBox.getSelectionModel().selectFirst();
     }
 
     enum comboBoxType
     {
-        usuario, examen, update
+        usuario, examen, updateExamenAsignacion
     }
 }

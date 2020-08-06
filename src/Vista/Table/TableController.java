@@ -38,6 +38,8 @@ public class TableController
     public static String[] columnasAsignacion = {"ID Asignacion", "User", "Examen", "Estado"};
     public static String[][] AsignacionData;
 
+    public static String[][] MateriasData;
+
     public static void initTables(TableView tablaUsuer, TableView tablaExam, TableView tablaAsig)
     {
         tablaUsuarios = tablaUsuer;
@@ -53,6 +55,8 @@ public class TableController
         actualizarTablaUser(db);
         actualizarTablaExamen(db);
         actualizarTablaAsignacion(db);
+        db.executeQuery("SELECT Materia FROM bfkbonwrvl7atwiehbto.Materias;");
+        MateriasData = db.obtenerDatosTabla();
         db.cerrarConexion();
 
         tablaUsuer.setRowFactory(tv ->

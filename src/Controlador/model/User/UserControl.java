@@ -41,7 +41,7 @@ public class UserControl
     public static User getByID(int iduser)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("UserControl.getByID");
         User user = getByID(db, iduser);
         db.cerrarConexion();
         return user;
@@ -80,7 +80,7 @@ public class UserControl
     public static User updateUsername(int idPersona, String newUsername)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("UserControl.updateusername");
         db.executeQuery("select idUser from bfkbonwrvl7atwiehbto.User where User.idPersona = "+idPersona+";");
         String[][] idUser = db.obtenerDatosTabla();
         db.executeInsert(
@@ -105,7 +105,7 @@ public class UserControl
     public static User updatePassword(int idPersona, String newPassword)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("UserControl.updatePassword");
         db.executeQuery("select idUser from bfkbonwrvl7atwiehbto.User where User.idPersona = "+idPersona+";");
         String[][] idUser = db.obtenerDatosTabla();
         db.executeInsert(

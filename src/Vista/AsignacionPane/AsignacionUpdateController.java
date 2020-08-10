@@ -25,7 +25,7 @@ public class AsignacionUpdateController
             if(idAsignacionSelected > 0)
             {
                 Database db = new Database();
-                db.conectar();
+                db.conectar("AsignationUpdateController.initDeleteButton");
                 db.borrarRegistro("Asignacion", "idAsignacion", idAsignacionSelected+"");
                 TableController.actualizarTablaAsignacion(db);
                 db.cerrarConexion();
@@ -40,7 +40,7 @@ public class AsignacionUpdateController
         button.onActionProperty().setValue(event ->
         {
             Database db = new Database();
-            db.conectar();
+            db.conectar("AsignacionUpdateController.initUpdate");
             String idExamen = db.getStringAt("idExamen", "Examen", "titulo", updateExamenSelected);
             db.actualizarCampo("Asignacion", "idExamen", idExamen, "idAsignacion", idAsignacionSelected+"");
             TableController.actualizarTablaAsignacion(db);

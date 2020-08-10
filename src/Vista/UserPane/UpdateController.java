@@ -34,7 +34,7 @@ public class UpdateController
                if(idPersonaSelected > 0)
                {
                    Database db = new Database();
-                   db.conectar();
+                   db.conectar("UpdateController.initDeleteButton()");
                    PersonaControl.delete(db, idPersonaSelected);
                    TableController.actualizarTablaUser(db);
                    db.cerrarConexion();
@@ -54,7 +54,7 @@ public class UpdateController
             if(!textField.getText().equals(""))
             {
                 Database db = new Database();
-                db.conectar();
+                db.conectar("UpdateController.initUpdate");
                 switch (type)
                 {
                     case name:

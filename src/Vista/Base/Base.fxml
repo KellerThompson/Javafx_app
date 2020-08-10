@@ -300,13 +300,7 @@
                               <ComboBox fx:id="resultExamenCombobox" layoutY="17.0" prefWidth="150.0" />
                            </children>
                         </Group>
-                        <Group layoutX="18.0" layoutY="108.0">
-                           <children>
-                              <Label text="Usuario:" />
-                              <ComboBox fx:id="resultUserCombobox" layoutY="17.0" prefWidth="150.0" />
-                           </children>
-                        </Group>
-                        <Group layoutX="18.0" layoutY="181.0">
+                        <Group layoutX="18.0" layoutY="122.0">
                            <children>
                               <Label text="Materia:" />
                               <ComboBox fx:id="resultMateriaCombobox" layoutY="17.0" prefWidth="150.0" />
@@ -322,12 +316,12 @@
                               <DropShadow color="#000000a5" />
                            </effect>
                         </Rectangle>
-                        <BarChart layoutX="26.0" layoutY="24.0" prefHeight="400.0" prefWidth="735.0">
+                        <BarChart fx:id="barChart" layoutX="26.0" layoutY="24.0" prefHeight="400.0" prefWidth="735.0">
                           <xAxis>
-                            <CategoryAxis side="BOTTOM" />
+                            <CategoryAxis fx:id="categoryAxis" label="Num. de Pregunta" side="BOTTOM" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis side="LEFT" />
+                            <NumberAxis fx:id="numberAxis" label="\% de Error" side="LEFT" upperBound="1.0" />
                           </yAxis>
                         </BarChart>
                      </children>

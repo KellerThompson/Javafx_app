@@ -13,7 +13,7 @@ public class PersonaControl
     public static Persona registrar(String name, String lastname)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaControl.registrar");
         db.executeInsert(
                 "insert into " + Database.dataBaseName + "." + tabla + " " +
                         "("+nameColumn+", "+lastnameColumn+") " +
@@ -43,7 +43,7 @@ public class PersonaControl
     public static Persona getByID(int idPersona)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaControl.gerByID");
         Persona persona = getByID(db, idPersona);
         db.cerrarConexion();
         return persona;
@@ -52,7 +52,7 @@ public class PersonaControl
     public static Persona updateName(int idPersona, String newname)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaContro.updateName");
         db.executeInsert(
                 "update "+Database.dataBaseName+"."+tabla+" set "+nameColumn+" = '"+newname+
                         "' where "+primaryKey+" = "+idPersona+";");
@@ -73,7 +73,7 @@ public class PersonaControl
     public static Persona updateLastname(int idPersona, String lastname)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaContro.updateLastName");
         db.executeInsert(
                 "update "+Database.dataBaseName+"."+tabla+" set "+lastnameColumn+" = '"+lastname+
                         "' where "+primaryKey+" = "+idPersona+";");
@@ -94,7 +94,7 @@ public class PersonaControl
     public static void delete(int idPersona)
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaContro.delete");
         UserControl.deleteUsersByIdPersona(db, idPersona);
         db.borrarRegistro(tabla, primaryKey, idPersona+"");
         db.cerrarConexion();
@@ -109,7 +109,7 @@ public class PersonaControl
     public static String[][] consultarTabla()
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaContro.consultarTabla");
         db.executeQuery("SELECT * FROM "+Database.dataBaseName+"."+tabla+";");
         String[][] tabla = db.obtenerDatosTabla();
         db.cerrarConexion();
@@ -125,7 +125,7 @@ public class PersonaControl
     public static String[][] getAllId()
     {
         Database db = new Database();
-        db.conectar();
+        db.conectar("PersonaContro.getAllId");
         db.executeQuery("SELECT Persona.idPersona FROM "+Database.dataBaseName+"."+tabla+";");
         String[][] tabla = db.obtenerDatosTabla();
         db.cerrarConexion();

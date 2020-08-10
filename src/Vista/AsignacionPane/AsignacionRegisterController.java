@@ -49,7 +49,7 @@ public class AsignacionRegisterController
         if(!usuarioSelected.equals("") && !exameneSelected.equals(""))
         {
             Database db = new Database();
-            db.conectar();
+            db.conectar("AsigancionRegisterController.registrar");
             String idUser = db.getStringAt("idUser", "User", "username", usuarioSelected);
             String idExamen = db.getStringAt("idExamen", "Examen", "titulo", exameneSelected);
             db.executeInsert(
@@ -69,13 +69,19 @@ public class AsignacionRegisterController
                    switch (type)
                    {
                        case usuario:
-                           usuarioSelected = newValue.toString();
+                           try {
+                               usuarioSelected = newValue.toString();
+                           } catch (Exception ex) { }
                            break;
                        case examen:
-                           exameneSelected = newValue.toString();
+                           try {
+                               exameneSelected = newValue.toString();
+                           } catch (Exception ex) { }
                            break;
                        case updateExamenAsignacion:
-                           updateExamenSelected = newValue.toString();
+                           try {
+                               updateExamenSelected = newValue.toString();
+                           } catch (Exception ex) { }
                            break;
                        default:
                            break;
@@ -93,10 +99,10 @@ public class AsignacionRegisterController
     public static void actualizarUserCombobox()
     {
         actualizarComboBox(asignacionUsuarioCombobox, usersData, 3);
-        ResultController.actualizarResultUserComboBox();
+        //ResultController.actualizarResultUserComboBox();
     }
 
-    private static void actualizarComboBox(ComboBox comboBox, String[][] data, int indexColumn)
+    public static void actualizarComboBox(ComboBox comboBox, String[][] data, int indexColumn)
     {
         ObservableList<String> items = FXCollections.observableArrayList();
         for(int i = 0; i < data.length; i++)

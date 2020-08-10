@@ -2,6 +2,7 @@ package Vista.Base;
 
 import Vista.AsignacionPane.AsignacionRegisterController;
 import Vista.AsignacionPane.AsignacionUpdateController;
+import Vista.ResultadoPane.Chart.ChartController;
 import Vista.ResultadoPane.ResultController;
 import Vista.Table.TableController;
 import Vista.ExamenPane.RegisterExamenController;
@@ -13,6 +14,9 @@ import Vista.UserPane.UpdateController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -100,10 +104,13 @@ public class BaseController
     @FXML private Pane resultsPane;
 
     @FXML private ComboBox resultExamenCombobox;
-    @FXML private ComboBox resultUserCombobox;
     @FXML private ComboBox resultMateriaCombobox;
 
     @FXML private Button updateGrafica;
+
+    @FXML private BarChart barChart;
+    @FXML private CategoryAxis categoryAxis;
+    @FXML private NumberAxis numberAxis;
 
     public void initialize()
     {
@@ -148,7 +155,8 @@ public class BaseController
 
         //-----------------------------------  Resultado Pane ------------------------------------------------------
 
-        ResultController.initialize(resultExamenCombobox, resultUserCombobox, resultMateriaCombobox, updateGrafica);
+        ResultController.initialize(resultExamenCombobox, resultMateriaCombobox, updateGrafica);
+        ChartController.initialize(barChart, categoryAxis, numberAxis);
     }
 }
 

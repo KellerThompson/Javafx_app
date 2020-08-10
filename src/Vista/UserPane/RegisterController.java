@@ -40,7 +40,7 @@ public class RegisterController
             String password = passwordTextfield.getText();
 
             Database db = new Database();
-            db.conectar();
+            db.conectar("RegisterController.registrar");
             Persona persona = PersonaControl.registrar(db, nombre, apellidos);
             UserControl.registrar(db, persona, username, password);
             nombreTextfield.setText("");

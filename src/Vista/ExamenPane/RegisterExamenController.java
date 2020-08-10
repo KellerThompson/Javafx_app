@@ -2,6 +2,7 @@ package Vista.ExamenPane;
 
 import Controlador.DataBase.Database;
 import Vista.AsignacionPane.AsignacionRegisterController;
+import Vista.ResultadoPane.ResultController;
 import Vista.UserPane.RegisterController;
 import Vista.Table.TableController;
 import com.jfoenix.controls.JFXTextField;
@@ -27,7 +28,7 @@ public class RegisterExamenController
             String titulo = examenTituloTextfield.getText();
 
             Database db = new Database();
-            db.conectar();
+            db.conectar("RegistrarExamenController.registrar");
             db.executeInsert("insert into bfkbonwrvl7atwiehbto.Examen (titulo, link) values ('"+titulo+"','"+link+"');");
             examenLinkTextfield.setText("");
             examenTituloTextfield.setText("");

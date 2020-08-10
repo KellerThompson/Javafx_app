@@ -2,6 +2,7 @@ package Vista.Table;
 
 import Controlador.DataBase.Database;
 import Controlador.model.User.UserControl;
+import Vista.ResultadoPane.ResultController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -51,7 +52,7 @@ public class TableController
         addColumns(tablaAsignacion, columnasAsignacion);
 
         Database db = new Database();
-        db.conectar();
+        db.conectar("TableController.initTables");
         actualizarTablaUser(db);
         actualizarTablaExamen(db);
         actualizarTablaAsignacion(db);

@@ -28,7 +28,7 @@ public class UpdateExamenController
             if(idExamenSelected > 0)
             {
                 Database db = new Database();
-                db.conectar();
+                db.conectar("UpdateExamenController.initDeleteButton");
                 db.borrarRegistro("Examen", "idExamen", idExamenSelected + "");
                 db.executeQuery("SELECT * FROM bfkbonwrvl7atwiehbto.Examen;");
                 TableController.actualizarTablaExamen(db);
@@ -46,7 +46,7 @@ public class UpdateExamenController
             if(!textField.getText().equals(""))
             {
                 Database db = new Database();
-                db.conectar();
+                db.conectar("UpdateExamenController.initUpdate");
                 switch (updateType)
                 {
                     case titulo:

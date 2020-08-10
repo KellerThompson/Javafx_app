@@ -21,7 +21,7 @@ public class Database
      * Inicia la conexion con la base de datos.
      * @author Keller Thompson
      */
-    public void conectar()
+    public void conectar(String className)
     {
         try
         {
@@ -29,7 +29,7 @@ public class Database
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conexion = DriverManager.getConnection(url_db, user, password); // SET GLOBAL time_zone = '-6:00';
             sentenciaSQL = conexion.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            System.out.println("Conexion exitosa");
+            System.out.println("Conexion exitosa: " + className);
         }
         catch(Exception ex)
         {
@@ -159,6 +159,24 @@ public class Database
             return false;
         }
     }
+
+    public int rowCount(String query)
+    {
+        try
+        {
+            resultSet = sentenciaSQL.executeQuery(query);
+            resultSet.last();
+            return resultSet.getRow();
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+            return 0;
+        }
+    }
+
+
+
     /**
      * Metodo que obtiene un registro especifico.
      * @param celda : nombre de la columna del dato que se desea

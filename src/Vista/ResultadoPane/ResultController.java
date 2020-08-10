@@ -1,42 +1,39 @@
 package Vista.ResultadoPane;
 
+import Vista.AsignacionPane.AsignacionRegisterController;
+import Vista.ResultadoPane.Chart.ChartController;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+
 
 import static Vista.Table.TableController.*;
 
 public class ResultController
 {
     private static ComboBox resultExamenCombobox;
-    private static ComboBox resultUserCombobox;
     private static ComboBox resultMateriaCombobox;
 
-    private static String examenSelected = "Todos";
-    private static String userSelected = "Todos";
+    private static String examenSelected = "";
     private static String materiaSelected = "Todos";
 
-    public static void initialize(ComboBox resultExamenCombobox1, ComboBox resultUserCombobox1,
-                                  ComboBox resultMateriaCombobox1, Button updateGrafica)
+    public static void initialize(ComboBox resultExamenCombobox1, ComboBox resultMateriaCombobox1,
+                                  Button updateGrafica)
     {
         resultExamenCombobox = resultExamenCombobox1;
-        resultUserCombobox = resultUserCombobox1;
         resultMateriaCombobox = resultMateriaCombobox1;
 
         initComboBox(resultExamenCombobox, comboBoxType.examen);
-        actualizarComboBox(resultExamenCombobox, ExamData, 1);
-
-        initComboBox(resultUserCombobox, comboBoxType.user);
-        actualizarComboBox(resultUserCombobox, usersData, 3);
+        actualizarResultExamenComboBox();
+        try { examenSelected = ExamData[0][1]; }
+        catch (Exception ex) { }
 
         initComboBox(resultMateriaCombobox, comboBoxType.materia);
-        actualizarComboBox(resultMateriaCombobox, MateriasData, 0);
+        AsignacionRegisterController.actualizarComboBox(resultMateriaCombobox, MateriasData, 0);
 
         updateGrafica.onActionProperty().setValue((ActionEvent event) ->
-                GraphController.updateGraph(examenSelected, userSelected, materiaSelected));
+                ChartController.updateGraph(examenSelected, materiaSelected));
     }
 
     private static void initComboBox(ComboBox comboBox, comboBoxType type)
@@ -47,13 +44,14 @@ public class ResultController
                     switch (type)
                     {
                         case examen:
-                            examenSelected = newValue.toString();
-                            break;
-                        case user:
-                            userSelected = newValue.toString();
+                            try {
+                                examenSelected = newValue.toString();
+                            } catch (Exception ex) { }
                             break;
                         case materia:
-                            materiaSelected = newValue.toString();
+                            try {
+                                materiaSelected = newValue.toString();
+                            } catch (Exception ex) { }
                             break;
                         default:
                             break;
@@ -63,26 +61,11 @@ public class ResultController
 
     public static void actualizarResultExamenComboBox()
     {
-        actualizarComboBox(resultExamenCombobox, ExamData, 1);
-    }
-
-    public static void actualizarResultUserComboBox()
-    {
-        actualizarComboBox(resultUserCombobox, usersData, 3);
-    }
-
-    private static void actualizarComboBox(ComboBox comboBox, String[][] data, int indexColumn)
-    {
-        ObservableList<String> items = FXCollections.observableArrayList();
-        items.add("Todos");
-        for(int i = 0; i < data.length; i++)
-            items.add(data[i][indexColumn]);
-        comboBox.itemsProperty().setValue(items);
-        comboBox.getSelectionModel().selectFirst();
+        AsignacionRegisterController.actualizarComboBox(resultExamenCombobox, ExamData, 1);
     }
 
     enum comboBoxType
     {
-        examen, user, materia
+        examen, materia
     }
 }
